@@ -1,18 +1,25 @@
 package net.lprnzz.traim.Profiles;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.lprnzz.traim.ScenarioLists.ScenarioModel;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tb_profiles")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProfileModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String username;
 
     private String description;
@@ -23,38 +30,4 @@ public class ProfileModel {
     @OneToMany(mappedBy = "creator")
     private List<ScenarioModel> creations;
 
-
-    public ProfileModel() {
-    }
-
-    public ProfileModel(String username, String description, int age) {
-        this.username = username;
-        this.description = description;
-        this.age = age;
-    }
-
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 }

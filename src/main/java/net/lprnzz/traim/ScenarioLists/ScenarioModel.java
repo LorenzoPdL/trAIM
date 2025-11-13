@@ -1,18 +1,25 @@
 package net.lprnzz.traim.ScenarioLists;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.lprnzz.traim.Profiles.ProfileModel;
 
 import java.util.List;
 
 // Transforma uma classe em uma entidade da DB
 @Entity
-@Table(name = "tb_scenarios")
+@Table(name = "tb_scenario")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ScenarioModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String scenarioName;
 
     private String subcategory;
@@ -25,49 +32,5 @@ public class ScenarioModel {
     @ManyToOne
     @JoinColumn(name = "creator_id")//Foreign Key ou Chave Estrangeria
     private ProfileModel creator;
-
-
-    public ScenarioModel() {
-    }
-
-    public ScenarioModel(int difficulty, String scenarioName, String description, String subcategory) {
-        this.difficulty = this.difficulty;
-        this.scenarioName = scenarioName;
-        this.description = description;
-        this.subcategory = subcategory;
-    }
-
-
-    public int getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public String getScenarioName() {
-        return scenarioName;
-    }
-
-    public void setScenarioName(String scenarioName) {
-        this.scenarioName = scenarioName;
-    }
-
-    public String getSubcategory() {
-        return subcategory;
-    }
-
-    public void setSubcategory(String subcategory) {
-        this.subcategory = subcategory;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
 }
